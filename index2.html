@@ -862,7 +862,7 @@
                 </p>
 
                 <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
-                    <a href="mailto:shahsaqlain622@gmail.com" class="magnetic-btn bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
+                    <a href="mailto:shahsaqlain622@gmail.com" onclick="handleEmailClick(event)" class="magnetic-btn bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                         Get In Touch
                     </a>
@@ -1187,6 +1187,23 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
         });
+
+        // Email button: try opening Gmail compose in a new tab, fallback to mailto
+        function handleEmailClick(e) {
+            const to = 'shahsaqlain622@gmail.com';
+            const subject = encodeURIComponent('Hello Saqlain');
+            const body = encodeURIComponent('Hi Saqlain,%0A%0AI found your portfolio and would like to connect regarding...');
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+
+            // Try opening Gmail compose in a new tab
+            const newWin = window.open(gmailUrl, '_blank', 'noopener');
+
+            // If popup succeeded, prevent the default mailto navigation
+            if (newWin) {
+                e.preventDefault();
+            }
+            // If blocked, allow the anchor's mailto href to run as a fallback
+        }
 
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
