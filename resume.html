@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume - Saqlain Shah</title>
+  <style>
+    body { margin:0; background:#0b0d12; color:#fff; font-family: Inter, sans-serif; }
+    .toolbar { display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.02); border-bottom:1px solid rgba(255,255,255,0.04); }
+    .btn { background:#111827; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; }
+    .frame { width:100%; height:calc(100vh - 56px); border:0; }
+    .center { display:flex; align-items:center; gap:12px }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index2.html" class="btn">Back</a>
+    <a id="downloadBtn" href="resume.pdf" class="btn" download>Download PDF</a>
+    <div style="flex:1"></div>
+    <div class="center">
+      <span style="color:#9ca3af; font-size:14px">Open in:</span>
+      <a id="openPdfBtn" class="btn" href="resume.pdf" target="_blank" rel="noopener noreferrer">New Tab</a>
+    </div>
+  </div>
+  <iframe id="resumeFrame" class="frame" src="resume.pdf"></iframe>
+
+  <script>
+    // If the browser can't render PDF inline, replace iframe with a link
+    const frame = document.getElementById('resumeFrame');
+    frame.addEventListener('error', () => {
+      const fallback = document.createElement('div');
+      fallback.style.padding = '24px';
+      fallback.innerHTML = '<p>PDF preview is not available in this browser. <a href="resume.pdf" target="_blank" rel="noopener noreferrer">Open or download the resume</a>.</p>';
+      frame.replaceWith(fallback);
+    });
+  </script>
+</body>
+</html>
